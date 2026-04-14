@@ -120,7 +120,9 @@ def main():
 
         # Show Output
         cv2.imshow("AirControl System", img)
-        if cv2.waitKey(1) & 0xFF == ord('q'):
+        
+        # Check if 'q' is pressed or if the window 'X' button was clicked
+        if cv2.waitKey(1) & 0xFF == ord('q') or cv2.getWindowProperty("AirControl System", cv2.WND_PROP_VISIBLE) < 1:
             break
 
     cap.release()

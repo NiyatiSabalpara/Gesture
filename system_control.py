@@ -10,8 +10,7 @@ class SystemController:
     def __init__(self):
         # 1. Init volume control (pycaw)
         devices = AudioUtilities.GetSpeakers()
-        interface = devices.Activate(IAudioEndpointVolume._iid_, CLSCTX_ALL, None)
-        self.volume = cast(interface, POINTER(IAudioEndpointVolume))
+        self.volume = devices.EndpointVolume # Uses modern pycaw property instead of raw COM Activate
         
         # Get volume range
         self.vol_range = self.volume.GetVolumeRange()

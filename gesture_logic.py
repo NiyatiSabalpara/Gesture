@@ -16,9 +16,9 @@ class GestureRecognizer:
 
     def check_activation(self, fingers):
         """
-        Check if 5 fingers are up and held for 2 seconds to toggle activation state.
+        Check if the 4 main fingers are up and held for 2 seconds to toggle activation state.
         """
-        if sum(fingers) == 5:
+        if sum(fingers[1:]) == 4:
             if self.open_palm_start_time == 0:
                 self.open_palm_start_time = time.time()
             elif time.time() - self.open_palm_start_time >= self.activation_hold_time:
@@ -46,16 +46,16 @@ class GestureRecognizer:
 
     def detect_fist(self, fingers):
         """
-        Checks if 0 fingers are up.
+        Checks if 4 main fingers are closed.
         """
-        return sum(fingers) == 0
+        return sum(fingers[1:]) == 0
 
     def detect_peace(self, fingers):
         """
         Checks if index and middle are up, others down.
         """
         # fingers list: [thumb, index, middle, ring, pinky]
-        return fingers[1] == 1 and fingers[2] == 1 and fingers[0] == 0 and fingers[3] == 0 and fingers[4] == 0
+        return fingers[1] == 1 and fingers[2] == 1 and fingers[3] == 0 and fingers[4] == 0
 
     def detect_swipe(self, lm_list):
         """
