@@ -53,12 +53,13 @@ class HandTracker:
         for lm in hand_landmarks:
             cx, cy = int(lm.x * w), int(lm.y * h)
             points.append((cx, cy))
-            cv2.circle(img, (cx, cy), 5, (255, 0, 255), cv2.FILLED)
+            cv2.circle(img, (cx, cy), 3, (255, 255, 255), cv2.FILLED)
+            cv2.circle(img, (cx, cy), 6, (255, 0, 255), 1)
             
         for connection in connections:
             start_idx, end_idx = connection
             if start_idx < len(points) and end_idx < len(points):
-                cv2.line(img, points[start_idx], points[end_idx], (0, 255, 0), 2)
+                cv2.line(img, points[start_idx], points[end_idx], (255, 255, 0), 2)
 
     def get_positions(self, img, hand_no=0, draw=True):
         lm_list = []
@@ -70,7 +71,8 @@ class HandTracker:
                     cx, cy = int(lm.x * w), int(lm.y * h)
                     lm_list.append([id, cx, cy])
                     if draw:
-                        cv2.circle(img, (cx, cy), 10, (255, 0, 255), cv2.FILLED)
+                        cv2.circle(img, (cx, cy), 5, (255, 255, 255), cv2.FILLED)
+                        cv2.circle(img, (cx, cy), 10, (255, 0, 255), 1)
         return lm_list
         
     def fingers_up(self, lm_list):
